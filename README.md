@@ -22,7 +22,7 @@ A proposta deste trabalho é justamente desenvolver um modelo de previsão de ve
 
 ## Bases Utilizadas
 
-# 📁 train.csv (vendas diárias)
+### 📁 train.csv (vendas diárias)
 Os dados de treino contêm séries temporais com as seguintes variáveis: store_nbr, family, onpromotion e a variável alvo sales.
 
 - date: data da venda por dia
@@ -31,18 +31,13 @@ Os dados de treino contêm séries temporais com as seguintes variáveis: store_
 - sales: representa o total de vendas de uma determinada família de produtos em uma loja específica, em uma data específica
 - onpromotion: indica o total de itens da família de produtos que estavam em promoção em uma loja, em uma determinada data
 
-# 📁 holidays_events.csv (feriados)
+### 📁 holidays_events.csv (feriados)
 Contém informações sobre feriados e eventos, juntamente com metadados
 
 - type: caracteristica do feriado (Nacional, regional ou local)
 - locale: tipo de feriado (Nacional, regional ou local)
 - locale_name: nome da localidade (pode ser: cidade ou estado)
 - description: descrição do feriado (Natl, Páscoa...)
-
-# Período de análises: 
-**Histórico** (treino):2013, 2014 e 2015
-**Previsão**: 2016
-
 
 ## Tratamento inicial dos dados 
 Antes de iniciar a análise exploratória e a modelagem, foi realizado um tratamento inicial nas base:
@@ -55,3 +50,7 @@ Antes de iniciar a análise exploratória e a modelagem, foi realizado um tratam
 - Tratamento de valores ausentes e zeros: Os valores nulos e igual a zero em variáveis como vendas, tkm e promoções foram substituídos por 0.1. Essa escolha teve dois objetivos:
     - Evitar erros técnicos em cálculos como logaritmos e divisões;
     - Preservar a estrutura completa da série temporal, garantindo que todas as combinações de loja e família estivessem presentes em todos os meses, o que é essencial para análises de sazonalidade, criação de lags e janelas móveis.
+
+- Período de análises:
+    Histórico (treino):2013, 2014 e 2015
+    Previsão: 2016
