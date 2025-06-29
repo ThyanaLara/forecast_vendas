@@ -15,7 +15,7 @@ Fonte dos dados está [nesse link](https://www.kaggle.com/c/store-sales-time-ser
 Na área de FP&A (Financial Planning & Analysis), é normal realizarmos o orçamento anual com antecedência, projetando receitas, custos e volumes. No entanto, por mais detalhado que esse planejamento seja, ele inevitavelmente sofre impactos de fatores externos como a sazonalidade, promoções, feriados e oscilações na demanda do consumidor. 
 Assim, confiar apenas no orçamento fixo pode gerar distorções e vieses ao longo do ano, dificultando a análise em tempo real e levando a justificativas recorrentes para variações e erros de phasing no planejamento financeiro.
 
-Nesse contexto o forecast (atualização recorrente das projeções ao longo do ano) ganha relevância estratégica. Com o avanço das tecnologias de dados e modelagem preditiva, tornou-se possível criar modelos de Machine Learning capazes de gerar previsões mais assertivas e adaptáveis, de acordo com múltiplos fatores(dados) e aprendisado continuo dos dados históricos.
+Nesse contexto o forecast (atualização recorrente das projeções ao longo do ano) ganha relevância estratégica. Com o avanço das tecnologias de dados e modelagem preditiva, tornou-se possível criar modelos de Machine Learning capazes de gerar previsões mais assertivas e adaptáveis, de acordo com múltiplos fatores(dados) e aprendizado contínuo dos dados históricos.
 
 A proposta deste trabalho é justamente desenvolver um modelo de previsão de vendas mensais por loja e família de produtos, utilizando dados reais de uma rede varejista com foco em apoiar e aprimorar os processos da área financeira.
 
