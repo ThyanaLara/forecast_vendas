@@ -21,4 +21,4 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
   Também foi avaliada a distribuição da quantidade de vendas por mês e por tipo de produto. Observou-se que dezembro concentra o maior volume de vendas, reforçando o padrão sazonal.
   E a distribuição de vendas por família, indicou que famílias como GROCERY I, BEVERAGES e PRODUCE concentram os maiores volumes, enquanto outras como BREAD/BAKERY possuem vendas mais baixas e estáveis.
 
-
+![alt text](fluxograma1.jpg)
