@@ -14,7 +14,7 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
 **3. Detecção e Tratamento de Outliers**:
 
   A detecção de outliers foi realizada em duas etapas. Inicialmente, o tratamento de outliers havia sido feito de forma geral, mas ao treinar os primeiros modelos, ficou evidente que valores extremos em meses específicos estavam impactando negativamente o desempenho. Com isso, revisei a análise, e passei a considerar a distribuição de outliers por mês, com base na mediana e no desvio interquartil (IQR) para a variável sales. 
-    Essa limpeza resultou na remoção de 5,61% da base original e contribuiu para melhorar a performance do modelo, mantendo a estabilidade das séries temporais.
+  Essa limpeza resultou na remoção de 5,61% da base original e contribuiu para melhorar a performance do modelo, mantendo a estabilidade das séries temporais.
 
 **4. Distribuição Mensal e por Tipo de Produto**:
 
