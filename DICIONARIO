@@ -4,13 +4,15 @@
 |-------------------------|---------------------------------------------------------------------------------------------------|
 | `date`                  | Data do mês de referência (último dia do mês)                                                     |
 | `store_nbr`             | Número identificador da loja                                                                      |
-| `family`                | Categoria/família do produto                                                                       |
+| `family`                | Categoria/família do produto                                                                      |
 | `sales`                 | Volume total de vendas no mês                                                                     |
 | `onpromotion`           | Quantidade de itens em promoção no mês (soma)                                                     |
-| `qtd_feriados`          | Quantidade total de feriados naquele mês para a loja (nacional/regional)                         |
+| `qtd_feriados`          | Quantidade total de feriados naquele mês para a loja (nacional/regional)                          |
 | `dias_ativos_venda`     | Número de dias no mês em que houve vendas para determinada loja e família                         |
 | `ano`                   | Ano da venda                                                                                      |
 | `mes`                   | Mês da venda                                                                                      |
 | `family_top6`           | Flag indicando se a família pertence ao grupo das 6 com maior volume                              |
 | `dias_ativos_venda_lag3`| Média móvel da frequência dos últimos 3 meses (deslocada)                                         |
 | `log_sales`             | Logaritmo das vendas (target transformado para regressão)                                         |
+| `quarter`               | Semestre                                                                                          |
+| `has_promo`             | Flag se loja e tipo de produto tiveram promção                                                    |
