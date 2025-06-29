@@ -4,7 +4,6 @@
 A análise exploratória teve como objetivo entender o comportamento das variáveis ao longo do tempo, *identificar padrões sazonais, avaliar a composição do mix de produtos e realizar o tratamento adequado de outliers*. Os principais pontos analisados foram:
 
 **1. Média vs Total de Vendas por Tipo de Produto (Top 6)**
-
     Foram comparadas duas métricas o volume total de vendas por família e a média de vendas por loja. A análise mostrou que a partir de 2016, o gráfico teve um comportamento curioso: enquanto a média de vendas por loja aumentou, o volume total de vendas caiu em 2017. Isso indicou que, embora as lojas estivessem vendendo mais, o número de lojas com atividade ou a frequência de venda por produto diminuiu.
 
 **2. Representatividade das Famílias de Produtos ao Longo dos Anos**
