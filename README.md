@@ -42,3 +42,7 @@ Contém informações sobre feriados e eventos, juntamente com metadados
 - store_nbr: id da loja onde os produtos foram vendidos
 - city: cidade da loja
 - state: estado da loja
+
+## 📘 Dicionário de Dados
+
+O dicionário completo está disponível [aqui](./DICIONARIO.md).
