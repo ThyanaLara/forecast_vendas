@@ -19,7 +19,7 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
   </figure>
 
   <figure style="display:inline-block; margin: 0 20px;">
-    <img src="Tedia%20de%20vendas%20por%20Familia.png" alt="Total por Família" width="300"/>
+    <img src="Total%20de%20vendas%20por%20Familia.png" alt="Total por Família" width="300"/>
     <figcaption style="text-align:center;">Total de vendas por Família</figcaption>
   </figure>
 </p>
