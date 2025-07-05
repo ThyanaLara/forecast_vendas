@@ -105,6 +105,9 @@ Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`T
 # Interpretação do Modelo com SHAP
 
 Para entender o funcionamento interno do modelo XGBoost e identificar as variáveis com maior influência nas previsões, utilizamos a técnica SHAP (SHapley Additive exPlanations). O gráfico abaixo mostra os impactos individuais de cada variável para cada previsão feita pelo modelo.
+<p align="center">
+  <img src="Anexos\shap.png" alt="%das familias de produto" width="90%" />
+</p>
 
 As variáveis mais importantes foram:
 
