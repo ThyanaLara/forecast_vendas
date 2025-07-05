@@ -1,9 +1,10 @@
-## 📘 Dicionário de Dados
+## Dicionário de Dados
 
+### Base tratada (train)
 | Campo                   | Descrição                                                                                         |
 |-------------------------|---------------------------------------------------------------------------------------------------|
 | `date`                  | Data do mês de referência (último dia do mês)                                                     |
-| `store_nbr`             | Número identificador da loja                                                                      |
+| `store_nbr`             | id da loja onde os produtos foram vendidos                                                        |
 | `family`                | Categoria/família do produto                                                                      |
 | `sales`                 | Volume total de vendas no mês                                                                     |
 | `onpromotion`           | Quantidade de itens em promoção no mês (soma)                                                     |
@@ -16,3 +17,20 @@
 | `log_sales`             | Logaritmo das vendas (target transformado para regressão)                                         |
 | `quarter`               | Semestre                                                                                          |
 | `has_promo`             | Flag se loja e tipo de produto tiveram promção                                                    |
+
+
+### Base holidays_events
+| Campo                   | Descrição                                                                                         |
+|-------------------------|---------------------------------------------------------------------------------------------------|
+|type                     | Caracteristica do feriado (Nacional, regional ou local)                                           |
+|locale                   | Tipo de feriado (Nacional, regional ou local)                                                     |
+|locale_name              | Nome da localidade (pode ser: cidade ou estado)                                                   |
+|description              | Descrição do feriado (Natl, Páscoa...)                                                            |
+
+
+### Base store
+| Campo                   | Descrição                                                                                         |
+|-------------------------|---------------------------------------------------------------------------------------------------|
+|store_nbr                | id da loja onde os produtos foram vendidos                                                        |
+|city                     | cidade da loja                                                                                    |
+|state                    | estado da loja                                                                                    |
