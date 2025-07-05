@@ -7,7 +7,11 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
 
   Foram comparadas duas métricas o volume total de vendas por família e a média de vendas por loja. A análise mostrou que a partir de 2016, o gráfico teve um comportamento curioso: enquanto a média de vendas por loja aumentou, o volume total de vendas caiu em 2017. Isso indicou que, embora as lojas estivessem vendendo mais, o número de lojas com atividade ou a frequência de venda por produto diminuiu.
 
-  ![alt text](Media de vendas por Familia.png) (Tedia de vendas por Familia.png)
+<p align="center">
+  <img src="Media de vendas por Familia.png" alt="Média por Família" width="45%" />
+  <img src="Total de vendas por Familia.png" alt="Total por Família" width="45%" />
+</p>
+
 
 **2. Representatividade das Famílias de Produtos ao Longo dos Anos**:
 
