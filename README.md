@@ -24,18 +24,9 @@ Os dados de treino contêm séries temporais com as seguintes variáveis: store_
 ### 📁 holidays_events.csv (feriados)
 Contém informações sobre feriados e eventos, juntamente com metadados
 
-- type: caracteristica do feriado (Nacional, regional ou local)
-- locale: tipo de feriado (Nacional, regional ou local)
-- locale_name: nome da localidade (pode ser: cidade ou estado)
-- description: descrição do feriado (Natl, Páscoa...)
-
 ### 📁 store.csv (loja)
 Contém informações sobre feriados e eventos, juntamente com metadados
 
-- store_nbr: id da loja onde os produtos foram vendidos
-- city: cidade da loja
-- state: estado da loja
 
 ## Dicionário de Dados
-
-O dicionário completo está disponível [aqui](./DICIONARIO.md).
+O dicionário completo está disponível [aqui](./DICIONARIO).
