@@ -1,32 +1,69 @@
-quando rodei o modelo sem considerar nenhuma feature nova, apenas com as colunas originais da base colunas_numericas = ['onpromotion', ]; colunas_categoricas = ['store_nbr', 'family_top6,'ano', 'mes']. Tive esse resultado:
+# Estratégia de Modelagem
+Durante o desenvolvimento do modelo preditivo de vendas mensais, adotou-se uma abordagem incremental, avaliando o impacto da adição de variáveis, transformação de dados e técnicas de validação. A seguir, descrevem-se os principais passos realizados e os aprendizados ao longo do processo.
 
-        Modelo          MAE         RMSE        R2
-0  RandomForest  2475.261475  4541.066640  0.786447
-1       XGBoost  2404.394661  4417.450732  0.797915
+### **1. Modelo Base (sem engenharia de features)**
+Inicialmente, foi treinado um modelo utilizando apenas as colunas originais da base:
 
-Quando adicionei as features de 'qtd_feriados', 'dias_ativos_venda' que foram metricas criadas a partir das outras bases chegamos no resultado:
+Variáveis numéricas: onpromotion
 
-         Modelo          MAE         RMSE        R2
-0  RandomForest  2466.802084  4383.265351  0.801031
-1       XGBoost  2452.731941  4400.296292  0.799482
+Variáveis categóricas: store_nbr, family_top6, ano, mes
 
-mesmo com bom resultado ao analizar mês a mês observamos bastante divergencias
+<p align="center">
+  <img src="Anexos\tabela_comparacao1.png" alt="%das familias de produto" width="90%" />
+</p>
 
-![alt text](image.png)
+Observação: os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observou-se uma grande discrepância entre as vendas previstas e as reais em determinados períodos.
 
-adicionei uma feature de  'has_promo' -> se tem ou não promoção,'is_fim_ano' -> se é últimos meses do ano,'sazonal_forte'-> de acordo com os meses que estavam com mais erros, e não obtive melhora no modelo:
+<p align="center">
+  <img src="Anexos\mes a mes1.png" alt="%das familias de produto" width="90%" />
+</p>
 
-         Modelo          MAE         RMSE        R2
-0  RandomForest  2527.470973  4604.633632  0.783767
-1       XGBoost  2583.362303  4636.858152  0.780730
+### **2. Primeiras Features Criadas (de calendários e vendas ativas)**
+Com base em análises complementares, adicionaram-se variáveis externas:
 
+qtd_feriados: número de feriados no mês
 
-voltando na analise descritiva vi que o campo de 'sales', tem uma grande variação da média e mediana, e valores maximos absudos de alto. E dias_ativos_vend Vendas feitas em poucos dias do mês em muitos casos → se o modelo não considera isso direito, pode superestimar.Sabemndo disso criei a feature 'dias_ativos_venda_lag3' -> média móvel dos 3 meses, e coloquei sales em logaritimo para as váriasções não impactarem tanto. O resultado foi melhor:
+dias_ativos_venda: quantidade de dias com movimentação de vendas por loja/família
 
-         Modelo          MAE         RMSE        R2
-0  RandomForest  2292.949935  4632.074253  0.894830
-1       XGBoost  2132.752709  4100.291120  0.897266
+Essas variáveis enriqueceram a capacidade preditiva do modelo ao incorporar comportamento do calendário e da frequência de vendas.
 
+<p align="center">
+  <img src="Anexos\tabela_comparacao2.png" alt="%das familias de produto" width="90%" />
+</p>
 
+Observação: houve ligeira melhora no desempenho, especialmente no RMSE e R² do Random Forest.
 
+### **3. Sazonalidade e Promoção (flags binárias)**
+Na tentativa de capturar padrões sazonais e comportamentos comerciais, foram adicionadas novas variáveis binárias:
+
+has_promo: indica se houve promoção no mês
+
+is_fim_ano: meses de novembro e dezembro
+
+sazonal_forte: meses com maiores erros identificados previamente (ex: maio, novembro, março)
+
+<p align="center">
+  <img src="Anexos\tabela_comparacao3.png" alt="%das familias de produto" width="90%" />
+</p>
+
+Observação: surpreendentemente, essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estavam parcialmente capturados por mes, onpromotion e family_top6, ou que o impacto binário era muito simplista para representar os padrões reais.
+
+### **4. Análise Descritiva e Transformações**
+Uma análise estatística descritiva revelou:
+
+A variável sales apresentava alta assimetria, com média muito maior que a mediana e valores máximos extremamente altos (outliers).
+
+A variável dias_ativos_venda apresentava grande variação mensal, o que poderia induzir o modelo ao erro em meses com menos atividade.
+
+Ações tomadas:
+
+Aplicação de transformação logarítmica em sales para suavizar os efeitos dos outliers.
+
+Criação da variável dias_ativos_venda_lag3: média móvel da frequência de vendas nos últimos 3 meses, fornecendo memória temporal ao modelo.
+
+<p align="center">
+  <img src="Anexos\tabela_comparacao4.png" alt="%das familias de produto" width="90%" />
+</p>
+
+Observação: essa etapa trouxe a maior melhoria no desempenho, indicando que a transformação do target e a incorporação da dinâmica de vendas foram cruciais para o ganho de performance. O XGBoost se destacou em todas as métricas, passando a ser o modelo de escolha.
 
