@@ -12,3 +12,5 @@ Antes da análise exploratória e modelagem, foi realizada a **preparação da b
 - Tratamento de valores inconsistentes:
     - Valores negativos foram removidos por representarem registros inválidos que poderiam comprometer a integridade da série.
     - Zeros e valores ausentes foram substituídos por 0.1 para evitar erros técnicos em transformações matemáticas (ex.: log()), garantir a presença de todas as combinações loja-produto ao longo do tempo e manter a continuidade das séries temporais — essencial para análises sazonais e uso de janelas móveis.
+
+![alt text](fluxograma1.jpg)

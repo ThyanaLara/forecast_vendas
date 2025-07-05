@@ -17,7 +17,7 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
   Também foi analisada a representatividade de cada família de produto ao longo do tempo. Observou-se que o mix de produtos mudou entre os anos.Poe exemplo a família GROCERY I, perdeu participação, enquanto PRODUCE ganhou destaque. Além disso, algumas famílias que não apareciam em determinados anos passaram a ser comercializadas posteriormente, o que pode refletir mudanças estratégicas de oferta.
 
 <p align="center">
-  <img src="%das familias de produtos.png" alt="% por Família" width="70%" />
+  <img src="%das familias de produtos.png" alt="%das familias de produto" width="70%" />
 </p>
 
 **3. Detecção e Tratamento de Outliers**:
@@ -39,4 +39,3 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
 </p>
 
 
-![alt text](fluxograma1.jpg)
