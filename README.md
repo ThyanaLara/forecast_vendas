@@ -6,8 +6,9 @@ O desenvolvimento seguiu a metodologia CRISP-DM, desde a compreensão do negóci
 
 Fonte dos dados está [nesse link](https://www.kaggle.com/c/store-sales-time-series-forecasting/data)
 
-
-## Overview do Projeto
+<p align="center">
+  <img src="3.Modelo\Anexos\TCC-1passos.jpg" alt="tabela" width="70%" />
+</p>
 
 No contexto da área de FP&A, embora o orçamento anual seja elaborado com antecedência para projetar receitas, custos e volumes, ele frequentemente é impactado por fatores externos como sazonalidade, promoções, feriados e variações de demanda, o que pode comprometer a precisão do planejamento ao longo do ano. Por isso, o uso de forecast — revisões e atualizações periódicas das projeções — torna-se essencial para uma análise mais realista.
 
@@ -30,3 +31,5 @@ Contém informações sobre feriados e eventos, juntamente com metadados
 
 ## Dicionário de Dados
 O dicionário completo está disponível [aqui](./DICIONARIO).
+
+
