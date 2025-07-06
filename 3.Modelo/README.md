@@ -12,10 +12,6 @@ Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
 | XGBoost       | 2.404,39  | 4.417,45  | 0.7979 |
 
 
-<p align="center">
-  <img src="Anexos\tabela_comparacao1.png" alt="tabela" width="50%" />
-</p>
-
 Os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observa-se uma grande diferença entre as vendas previstas e as reais em alguns períodos.
 
 <p align="center">
@@ -27,17 +23,19 @@ Com base nas primeiras etapas do projeto, adicionei as variáveis externas calcu
 
 Essas variáveis melhoraram a capacidade preditiva do modelo ao incorporar novos comportamentos ao calendário e a frequência de vendas. Resultado otimizou um pouco o RMSE e R² do Random Forest.
 
-<p align="center">
-  <img src="Anexos\tabela_comparacao2.png" alt="tabela" width="50%" />
-</p>
+| Modelo        | MAE       | RMSE      | R²     |
+|---------------|-----------|-----------|--------|
+| RandomForest  | 2.466,80  | 4.383,26  | 0.8010 |
+| XGBoost       | 2.452,73  | 4.400,30  | 0.7995 |
 
 
 ###     **3. Sazonalidade e Promoção (flags binárias)**
 Na tentativa de capturar padrões sazonais e comportamentos comerciais, adicionei novas variáveis binárias: has_promo (se houve promoção no mês), is_fim_ano (meses de novembro e dezembro) e sazonal_forte (meses com maiores erros identificados nos modelos passados)
 
-<p align="center">
-  <img src="Anexos\tabela_comparacao3.png" alt="tabela" width="50%" />
-</p>
+| Modelo        | MAE       | RMSE      | R²     |
+|---------------|-----------|-----------|--------|
+| RandomForest  | 2.527,47  | 4.604,63  | 0.7838 |
+| XGBoost       | 2.583,36  | 4.636,86  | 0.7807 |
 
 Essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estam sendo capturados pelas demais Features, ou elas são simplistas demais para representar os padrões reais.
 
@@ -50,10 +48,10 @@ Para lidar com esses pontos, foram aplicadas duas transformações principais:
 
   - Criação da variável `variável dias_ativos_venda_lag3`: média móvel da frequência de vendas nos três meses anteriores, permitindo capturar padrões temporais e fornecer ao modelo um senso de memória.
 
-
-<p align="center">
-  <img src="Anexos\tabela_comparacao4.png" alt="tabela" width="50%" />
-</p>
+| Modelo        | MAE       | RMSE      | R²     |
+|---------------|-----------|-----------|--------|
+| RandomForest  | 2.292,95  | 4.632,07  | 0.8948 |
+| XGBoost       | 2.132,75  | 4.100,29  | 0.8973 |
 
 Essa última etapa contribuio bastante para a melhora das métricas de avaliação. Mesmo com meses discrepantes como em fevereiro. Abaixo, observa-se o desempenho mensal do modelo com as features selecionadas:
 <p align="center">
@@ -79,7 +77,8 @@ O resultado foi: *{'max_depth': 5, 'n_estimators': 300,'colsample_bytree': 1.0, 
 
 # Cross Validate com TimeSeriesSplit
 
-Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`TimeSeriesSplit`), com 5 divisões crescentes de treino e teste, respeitando a ordem cronológica dos dados. O objetivo foi avaliar a estabilidade do desempenho do modelo ao longo do tempo, simulando diferentes períodos de previsão.
+Para validar o modelo, utilizei a validação cruzada temporal `TimeSeriesSplit`, com 5 divisões de treino e teste, respeitando a ordem cronológica dos dados. 
+O objetivo foi avaliar a **estabilidade e a capacidade de generalização do modelo ao longo do tempo**, simulando diferentes cenários de previsão com base no histórico.
 
 ### Resultados por Fold
 
@@ -90,6 +89,8 @@ Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`T
 | 3    | 2.254,38 | 3.758,42 | 0.8463 |
 | 4    | 2.620,12 | 4.309,74 | 0.8062 |
 | 5    | 2.681,02 | 4.139,55 | 0.8296 |
+
+Esse tipo de validação é importante em problemas de séries temporais, pois:analisa como o modelo se comporta em períodos diferentes, ajuda a detectar overfitting e simular melhor a realidade, já que previsões futuras sempre são feitas com base no passado.
 
 ### Estatísticas Gerais
 
@@ -102,27 +103,25 @@ Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`T
 - **R² médio**: 0.7923  
   Em média, o modelo explica aproximadamente 79,2% da variabilidade das vendas reais ao longo do tempo.
 
-### Resumo
-
-- Os resultados indicam um bom desempenho e consistência: mesmo com variações mensais, o modelo mantém valores de R² acima de 0.71 em todos os folds.
-- Folds com menor erro (como Fold 3 e Fold 5) possivelmente coincidem com períodos mais regulares nas vendas.
-- A variação do MAE entre os folds mostra que o modelo ainda possui espaço para melhorias em meses com comportamento atípico.
-- O R² médio próximo de 0.80 confirma que o modelo é adequado para uso preditivo mensal, com bom equilíbrio entre performance e generalização.
-
 
 # Interpretação do Modelo com SHAP
 
-Para entender o funcionamento interno do modelo XGBoost e identificar as variáveis com maior influência nas previsões, utilizamos a técnica SHAP (SHapley Additive exPlanations). O gráfico abaixo mostra os impactos individuais de cada variável para cada previsão feita pelo modelo.
+Para entender como cada variável influenciou as previsões do modelo XGBoost, utilizei a técnica SHAP (SHapley Additive exPlanations). O gráfico abaixo mostra os **impactos individuais de cada variável** para cada previsão feita pelo modelo:
 <p align="center">
   <img src="Anexos\shap.png" alt="tabela" width="70%" />
 </p>
 
-As variáveis mais importantes foram:
-
-- `family_top6_Outros`: famílias de produtos fora do grupo principal tendem a reduzir as vendas previstas.
-- `onpromotion`: número de itens em promoção impacta positivamente as previsões, como esperado.
+Em resumo, o gráfico mostra as variáveis com maior impacto:
+- `family_top6_Outros`: teve o maior peso. Famílias de produtos fora do grupo principal tendem a aumentar as vendas previstas.
+- `onpromotion`: número de itens em promoção impacta positivamente as previsões.
 - `dias_ativos_venda` e `dias_ativos_venda_lag3`: representam a frequência de vendas por mês e são diretamente proporcionais ao volume previsto.
 - Variáveis específicas de loja, como `store_nbr_44` e `store_nbr_47`, também apresentaram influência significativa, o que indica comportamento local captado pelo modelo.
 
-A análise reforça a importância das features criadas no processo de engenharia de variáveis e demonstra que o modelo é sensível a fatores sazonais, de promoção e à composição das famílias de produtos.
+Essa análise reforça a relevância das variáveis criadas durante a etapa de feature engineering e mostra que o modelo é sensível a fatores sazonais, promocionais e à composição das famílias de produtos.
+
+# Conclusões Finais
+
+
+
+
 
