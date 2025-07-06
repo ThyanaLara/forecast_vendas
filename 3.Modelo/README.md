@@ -117,11 +117,19 @@ Em resumo, o gráfico mostra as variáveis com maior impacto:
 - `dias_ativos_venda` e `dias_ativos_venda_lag3`: representam a frequência de vendas por mês e são diretamente proporcionais ao volume previsto.
 - Variáveis específicas de loja, como `store_nbr_44` e `store_nbr_47`, também apresentaram influência significativa, o que indica comportamento local captado pelo modelo.
 
-Essa análise reforça a relevância das variáveis criadas durante a etapa de feature engineering e mostra que o modelo é sensível a fatores sazonais, promocionais e à composição das famílias de produtos.
 
-# Conclusões Finais
+# Conclusões finais 
 
+- As validações reforçaram a importância da etapa de *feature engineering* para criar variáveis que complemente o modelo, assim trazendo sensibilidade a fatores sazonais, promocionais e à composição das famílias de produtos.
+- A variável criada de frequência de vendas `dias_ativos_venda_lag3` apresentou boa aderência ao capturar padrões temporais e suavizar os efeitos de variação entre meses.
+- Os resultados indicaram **bom desempenho e consistência**, mesmo com oscilações sazonais ou períodos atípicos, como observado em fevereiro.
+- O R² médio de aproximadamente 80% sugere que o modelo é adequado para previsão mensal, alcançando um **equilíbrio entre performance, generalização e interpretabilidade**.
 
+# Sugestões para Trabalhos Futuros
+
+- A variação do MAE entre os folds indica que o modelo ainda pode ser melhorado para lidar com meses com comportamento mais instável. Recomendo revisar os outliers desses períodos e avaliar.
+- A partir da análise SHAP, observou-se que as famílias de produtos fora do top 6 tiveram maior impacto nas previsões. Como proposta futura, vale a pena segmentá-las melhor e construir modelos específicos para esses grupos.
+- Outra possibilidade seria explorar outros modelos baseados em séries temporais por família ou loja, com por exemplo o Prophet ou até mesmo redes neurais recorrentes (LSTM).
 
 
 
