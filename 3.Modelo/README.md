@@ -1,15 +1,15 @@
 # Estratégia de Modelagem
 No desenvolvimento do modelo preditivo de vendas mensais, incrementei e avaliei o impacto das variáveis adicionando em etapas.  Os principais passos realizados e comentários do processo, são:
 
-    ###**1. Modelo Base (sem engenharia de features)**
-  Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
-  - Variáveis numéricas: onpromotion
-  - Variáveis categóricas: store_nbr, family_top6, ano, mes
+ ### **1. Modelo Base (sem engenharia de features)**
+Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
+ - Variáveis numéricas: onpromotion
+ - Variáveis categóricas: store_nbr, family_top6, ano, mes
 
-  | Modelo        | MAE       | RMSE      | R²     |
-  |---------------|-----------|-----------|--------|
-  | RandomForest  | 2.475,26  | 4.541,07  | 0.7864 |
-  | XGBoost       | 2.404,39  | 4.417,45  | 0.7979 |
+ | Modelo        | MAE       | RMSE      | R²     |
+ |---------------|-----------|-----------|--------|
+ | RandomForest  | 2.475,26  | 4.541,07  | 0.7864 |
+ | XGBoost       | 2.404,39  | 4.417,45  | 0.7979 |
 
 
 Os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observa-se uma grande diferença entre as vendas previstas e as reais em alguns períodos.
