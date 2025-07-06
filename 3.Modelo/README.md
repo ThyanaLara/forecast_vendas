@@ -9,13 +9,13 @@ Variáveis numéricas: onpromotion
 Variáveis categóricas: store_nbr, family_top6, ano, mes
 
 <p align="center">
-  <img src="Anexos\tabela_comparacao1.png" alt="%das familias de produto" width="50%" />
+  <img src="Anexos\tabela_comparacao1.png" alt="tabela" width="50%" />
 </p>
 
 Observação: os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observou-se uma grande discrepância entre as vendas previstas e as reais em determinados períodos.
 
 <p align="center">
-  <img src="Anexos\mes a mes1.png" alt="%das familias de produto" width="90%" />
+  <img src="Anexos\mes a mes1.png" alt="tabela" width="90%" />
 </p>
 
 ###     **2. Primeiras Features Criadas (de calendários e vendas ativas)**
@@ -28,7 +28,7 @@ dias_ativos_venda: quantidade de dias com movimentação de vendas por loja/fam�
 Essas variáveis enriqueceram a capacidade preditiva do modelo ao incorporar comportamento do calendário e da frequência de vendas.
 
 <p align="center">
-  <img src="Anexos\tabela_comparacao2.png" alt="%das familias de produto" width="50%" />
+  <img src="Anexos\tabela_comparacao2.png" alt="tabela" width="50%" />
 </p>
 
 Observação: houve ligeira melhora no desempenho, especialmente no RMSE e R² do Random Forest.
@@ -43,7 +43,7 @@ is_fim_ano: meses de novembro e dezembro
 sazonal_forte: meses com maiores erros identificados previamente (ex: maio, novembro, março)
 
 <p align="center">
-  <img src="Anexos\tabela_comparacao3.png" alt="%das familias de produto" width="50%" />
+  <img src="Anexos\tabela_comparacao3.png" alt="tabela" width="50%" />
 </p>
 
 Observação: surpreendentemente, essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estavam parcialmente capturados por mes, onpromotion e family_top6, ou que o impacto binário era muito simplista para representar os padrões reais.
@@ -62,12 +62,12 @@ Aplicação de transformação logarítmica em sales para suavizar os efeitos do
 Criação da variável dias_ativos_venda_lag3: média móvel da frequência de vendas nos últimos 3 meses, fornecendo memória temporal ao modelo.
 
 <p align="center">
-  <img src="Anexos\tabela_comparacao4.png" alt="%das familias de produto" width="50%" />
+  <img src="Anexos\tabela_comparacao4.png" alt="tabela" width="50%" />
 </p>
 
 Observação: essa etapa trouxe a maior melhoria no desempenho, indicando que a transformação do target e a incorporação da dinâmica de vendas foram cruciais para o ganho de performance. O XGBoost se destacou em todas as métricas, passando a ser o modelo de escolha.
 <p align="center">
-  <img src="Anexos\mes a mes2.png" alt="%das familias de produto" width="90%" />
+  <img src="Anexos\mes a mes 2.png" alt="tabela" width="90%" />
 </p>
 
 # Cross Validate com TimeSeriesSplit
@@ -107,7 +107,7 @@ Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`T
 
 Para entender o funcionamento interno do modelo XGBoost e identificar as variáveis com maior influência nas previsões, utilizamos a técnica SHAP (SHapley Additive exPlanations). O gráfico abaixo mostra os impactos individuais de cada variável para cada previsão feita pelo modelo.
 <p align="center">
-  <img src="Anexos\shap.png" alt="%das familias de produto" width="70%" />
+  <img src="Anexos\shap.png" alt="tabela" width="70%" />
 </p>
 
 As variáveis mais importantes foram:
