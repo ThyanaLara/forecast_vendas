@@ -4,11 +4,11 @@ Este trabalho tem como objetivo desenvolver um modelo de previsão de vendas men
 
 O desenvolvimento seguiu a metodologia CRISP-DM, desde a compreensão do negócio e da base de dados até a preparação dos dados, modelagem, avaliação dos resultados e sugestões para futuras implementações.
 
-Fonte dos dados está [nesse link](https://www.kaggle.com/c/store-sales-time-series-forecasting/data)
-
 <p align="center">
-  <img src="3.Modelo\Anexos\TCC-1passos.jpg" alt="tabela" width="70%" />
+  <img src="3.Modelo\Anexos\TCC-1passos.jpg" alt="tabela" width="90%" />
 </p>
+
+Fonte dos dados está [nesse link](https://www.kaggle.com/c/store-sales-time-series-forecasting/data)
 
 ## Overview do Projeto
 
