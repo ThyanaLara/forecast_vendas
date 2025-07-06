@@ -3,9 +3,8 @@ No desenvolvimento do modelo preditivo de vendas mensais, incrementei e avaliei 
 
 ###     **1. Modelo Base (sem engenharia de features)**
 Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
-
-Variáveis numéricas: onpromotion
-Variáveis categóricas: store_nbr, family_top6, ano, mes
+- Variáveis numéricas: onpromotion
+- Variáveis categóricas: store_nbr, family_top6, ano, mes
 
 <p align="center">
   <img src="Anexos\tabela_comparacao1.png" alt="tabela" width="50%" />
