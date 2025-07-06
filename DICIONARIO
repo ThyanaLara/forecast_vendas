@@ -1,6 +1,7 @@
 ## Dicionário de Dados
 
 ### Base tratada (train)
+
 | Campo                   | Descrição                                                                                         |
 |-------------------------|---------------------------------------------------------------------------------------------------|
 | `date`                  | Data do mês de referência (último dia do mês)                                                     |
@@ -20,6 +21,7 @@
 
 
 ### Base holidays_events
+
 | Campo                   | Descrição                                                                                         |
 |-------------------------|---------------------------------------------------------------------------------------------------|
 |type                     | Caracteristica do feriado (Nacional, regional ou local)                                           |
@@ -29,6 +31,7 @@
 
 
 ### Base store
+
 | Campo                   | Descrição                                                                                         |
 |-------------------------|---------------------------------------------------------------------------------------------------|
 |store_nbr                | id da loja onde os produtos foram vendidos                                                        |
