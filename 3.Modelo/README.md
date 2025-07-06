@@ -6,6 +6,12 @@ Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
 - Variáveis numéricas: onpromotion
 - Variáveis categóricas: store_nbr, family_top6, ano, mes
 
+| Modelo        | MAE       | RMSE      | R²     |
+|---------------|-----------|-----------|--------|
+| RandomForest  | 2.475,26  | 4.541,07  | 0.7864 |
+| XGBoost       | 2.404,39  | 4.417,45  | 0.7979 |
+
+
 <p align="center">
   <img src="Anexos\tabela_comparacao1.png" alt="tabela" width="50%" />
 </p>
