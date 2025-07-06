@@ -9,9 +9,7 @@ stores = pd.read_csv(r'C:\Users\Thyana De Lara\Documents\TCC\modelo_vendas_forec
 train['date'] = pd.to_datetime(train['date'])
 holidays_events['date'] = pd.to_datetime(holidays_events['date'])
 
-
-# Criação do campo de frequência #
-
+#Criação do campo de frequência
 # Filtrar a base para considerar apenas linhas com venda real
 df_com_venda = train[train['sales'] > 0]
 
@@ -27,8 +25,7 @@ df_volume_mensal = df_volume.groupby(['store_nbr', 'family', 'ano', 'mes'])['vol
 
 # Criar uma coluna com nome e tipo dos feriados agrupados por mês
 feriados_por_mes_detalhado = holidays_events.groupby(holidays_events['date'].dt.to_period('M')).agg({
-    'description': lambda x: ', '.join(x.unique())
-}).reset_index()
+    'description': lambda x: ', '.join(x.unique())}).reset_index()
 
 print(feriados_por_mes_detalhado)
 
@@ -62,13 +59,11 @@ for idx, row in holidays.iterrows():
 # Criar um novo DataFrame com os feriados já mapeados por loja
 holidays_per_store = pd.DataFrame(expanded_rows)
 
-# Criar uma coluna de ano e mês para facilitar o agrupamento
+# Criar uma coluna de ano e mês
 holidays_per_store['mes_ano'] = holidays_per_store['date'].dt.to_period('M')
 
 # Agora, contar quantos feriados por loja em cada mês
 qtd_feriados_por_loja_mes = holidays_per_store.groupby(['store_nbr', 'mes_ano']).size().reset_index(name='qtd_feriados')
-
-# Se quiser, pode visualizar:
 print(qtd_feriados_por_loja_mes.head())
 
 # Agrupar o train mensalmente por loja e família
@@ -79,17 +74,15 @@ df['ano'] = df['date'].dt.year
 df['mes'] = df['date'].dt.month
 
 # Juntar com o DataFrame mensal
-df = df.merge(
-    qtd_feriados_por_loja_mes,
-    left_on=['store_nbr', 'date'],  # ou ['store_nbr', 'mes_ano'], dependendo de como estiver sua base
+df = df.merge(qtd_feriados_por_loja_mes,
+    left_on=['store_nbr', 'date'], 
     right_on=['store_nbr', 'mes_ano'],
-    how='left'
-)
+    how='left')
 
 # Preencher os meses sem feriado com zero
 df['qtd_feriados'] = df['qtd_feriados'].fillna(0)
 
-# Unir na sua base final (df_modelo) para adicionar a nova coluna
+# Unir na base final
 df = df.merge(df_volume_mensal, on=['store_nbr', 'family', 'ano', 'mes'], how='left')
 
 # Preencher com zero onde não teve volume
@@ -102,7 +95,6 @@ df['sales'] = np.maximum(df['sales'], 0)  # zera valores negativos
 df['sales'] = df['sales'].replace(0, 0.01)
 
 colunas = ['date', 'store_nbr', 'family', 'sales', 'onpromotion', 'ano', 'mes', 'qtd_feriados', 'dias_ativos_venda']
-
 df = df[colunas]
 
 print("\nContagem de valores nulos por coluna:")

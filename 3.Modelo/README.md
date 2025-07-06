@@ -1,74 +1,68 @@
 # Estratégia de Modelagem
-Durante o desenvolvimento do modelo preditivo de vendas mensais, adotou-se uma abordagem incremental, avaliando o impacto da adição de variáveis, transformação de dados e técnicas de validação. A seguir, descrevem-se os principais passos realizados e os aprendizados ao longo do processo.
+No desenvolvimento do modelo preditivo de vendas mensais, incrementei e avaliei o impacto das variáveis adicionando em etapas.  Os principais passos realizados e comentários do processo, são:
 
 ###     **1. Modelo Base (sem engenharia de features)**
-Inicialmente, foi treinado um modelo utilizando apenas as colunas originais da base:
+Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
 
 Variáveis numéricas: onpromotion
-
 Variáveis categóricas: store_nbr, family_top6, ano, mes
 
 <p align="center">
   <img src="Anexos\tabela_comparacao1.png" alt="tabela" width="50%" />
 </p>
 
-Observação: os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observou-se uma grande discrepância entre as vendas previstas e as reais em determinados períodos.
+Os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observou-se uma grande diferença entre as vendas previstas e as reais em alguns períodos.
 
 <p align="center">
   <img src="Anexos\mes a mes1.png" alt="tabela" width="90%" />
 </p>
 
 ###     **2. Primeiras Features Criadas (de calendários e vendas ativas)**
-Com base em análises complementares, adicionaram-se variáveis externas:
+Com base nas primeiras etapas do projeto, adicionei as variáveis externas calculadas anteriormente: qtd_feriados (número de feriados no mês) e dias_ativos_venda (quantidade de dias com movimentação de vendas por loja/família)
 
-qtd_feriados: número de feriados no mês
-
-dias_ativos_venda: quantidade de dias com movimentação de vendas por loja/família
-
-Essas variáveis enriqueceram a capacidade preditiva do modelo ao incorporar comportamento do calendário e da frequência de vendas.
+Essas variáveis melhoraram a capacidade preditiva do modelo ao incorporar novos comportamentos ao calendário e a frequência de vendas. Resultado otimizou um pouco o RMSE e R² do Random Forest.
 
 <p align="center">
   <img src="Anexos\tabela_comparacao2.png" alt="tabela" width="50%" />
 </p>
 
-Observação: houve ligeira melhora no desempenho, especialmente no RMSE e R² do Random Forest.
 
 ###     **3. Sazonalidade e Promoção (flags binárias)**
-Na tentativa de capturar padrões sazonais e comportamentos comerciais, foram adicionadas novas variáveis binárias:
-
-has_promo: indica se houve promoção no mês
-
-is_fim_ano: meses de novembro e dezembro
-
-sazonal_forte: meses com maiores erros identificados previamente (ex: maio, novembro, março)
+Na tentativa de capturar padrões sazonais e comportamentos comerciais, adicionei novas variáveis binárias: has_promo (se houve promoção no mês), is_fim_ano (meses de novembro e dezembro) e sazonal_forte (meses com maiores erros identificados nos modelos passados)
 
 <p align="center">
   <img src="Anexos\tabela_comparacao3.png" alt="tabela" width="50%" />
 </p>
 
-Observação: surpreendentemente, essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estavam parcialmente capturados por mes, onpromotion e family_top6, ou que o impacto binário era muito simplista para representar os padrões reais.
+Essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estam sendo capturados capturados pelas demais Features, ou as Features são simplistas para representar os padrões reais.
 
 ###     **4. Análise Descritiva e Transformações**
-Uma análise estatística descritiva revelou:
+Voltando um pouco na análise estatística descritiva (2.Analise Exploratoria), observei que a variável sales apresentava alta assimetria, com **média muito maior que a mediana** e valores **máximos extremamente altos** (outliers) e a variável dias_ativos_venda apresentava **grande variação mensal**, o que pode induzir o modelo ao erro em meses com menor frequência.
 
-A variável sales apresentava alta assimetria, com média muito maior que a mediana e valores máximos extremamente altos (outliers).
-
-A variável dias_ativos_venda apresentava grande variação mensal, o que poderia induzir o modelo ao erro em meses com menos atividade.
-
-Ações tomadas:
-
-Aplicação de transformação logarítmica em sales para suavizar os efeitos dos outliers.
-
-Criação da variável dias_ativos_venda_lag3: média móvel da frequência de vendas nos últimos 3 meses, fornecendo memória temporal ao modelo.
+Dessa forma, apliquei a transformação logarítmica em `sales` para suavizar os efeitos dos outliers e criei a `variável dias_ativos_venda_lag3` (média móvel da frequência de vendas nos últimos 3 meses), fornecendo memória temporal ao modelo.
 
 <p align="center">
   <img src="Anexos\tabela_comparacao4.png" alt="tabela" width="50%" />
 </p>
 
-Observação: essa etapa trouxe a maior melhoria no desempenho, indicando que a transformação do target e a incorporação da dinâmica de vendas foram cruciais para o ganho de performance. O XGBoost se destacou em todas as métricas, passando a ser o modelo de escolha.
+Essa última etapa trouxe grande vantagem ao desempenho, melhorando as métricas. Mesmo com meses discrepantes (ex: Fevereiro), esses foram as Features escolhidas.
 <p align="center">
   <img src="Anexos\mes a mes 2.png" alt="tabela" width="90%" />
 </p>
+
+ O XGBoost se destacou em todas as métricas, e foi selecionado para seguir com os próximos passos
+
+ Escolhi o GridSearchCV para encontrar a melhor combinação de hiperparâmetros para meu modelo por meio de validação cruzada. E os hiperparâmetros escolhidos foram:
+
+ - n_estimators: Quantidade de árvores
+ - max_depth: Complexidade de cada árvore (profundidade)
+ - learning_rate: Peso de cada árvore nova
+ - subsample: % das amostras por árvore
+ - colsample_bytree: % das features por árvore
+ - random_state: Reprodutibilidade
+ - n_jobs: Performance
+
+E o resultado foi: {'max_depth': 5, 'n_estimators': 300,'colsample_bytree': 1.0, 'learning_rate': 0.1, 'subsample': 0.8}
 
 # Cross Validate com TimeSeriesSplit
 
@@ -95,7 +89,7 @@ Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`T
 - **R² médio**: 0.7923  
   Em média, o modelo explica aproximadamente 79,2% da variabilidade das vendas reais ao longo do tempo.
 
-### Interpretação
+### Resumo
 
 - Os resultados indicam um bom desempenho e consistência: mesmo com variações mensais, o modelo mantém valores de R² acima de 0.71 em todos os folds.
 - Folds com menor erro (como Fold 3 e Fold 5) possivelmente coincidem com períodos mais regulares nas vendas.
