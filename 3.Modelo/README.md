@@ -10,7 +10,7 @@ Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
   <img src="Anexos\tabela_comparacao1.png" alt="tabela" width="50%" />
 </p>
 
-Os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observou-se uma grande diferença entre as vendas previstas e as reais em alguns períodos.
+Os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a mês, observa-se uma grande diferença entre as vendas previstas e as reais em alguns períodos.
 
 <p align="center">
   <img src="Anexos\mes a mes1.png" alt="tabela" width="90%" />
@@ -33,10 +33,10 @@ Na tentativa de capturar padrões sazonais e comportamentos comerciais, adicione
   <img src="Anexos\tabela_comparacao3.png" alt="tabela" width="50%" />
 </p>
 
-Essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estam sendo capturados capturados pelas demais Features, ou as Features são simplistas para representar os padrões reais.
+Essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estam sendo capturados pelas demais Features, ou elas são simplistas demais para representar os padrões reais.
 
 ###     **4. Análise Descritiva e Transformações**
-Voltando um pouco na análise estatística descritiva (2.Analise Exploratoria), observei que a variável sales apresentava alta assimetria, com **média muito maior que a mediana** e valores **máximos extremamente altos** (outliers) e a variável dias_ativos_venda apresentava **grande variação mensal**, o que pode induzir o modelo ao erro em meses com menor frequência.
+Voltando um pouco na análise estatística descritiva (2.Analise Exploratoria), observei que a variável `sales` apresentava alta assimetria, com **média muito maior que a mediana** e valores **máximos extremamente altos** (outliers) e a variável `dias_ativos_venda` apresentava **grande variação mensal**, o que pode induzir o modelo ao erro em meses com menor frequência.
 
 Dessa forma, apliquei a transformação logarítmica em `sales` para suavizar os efeitos dos outliers e criei a `variável dias_ativos_venda_lag3` (média móvel da frequência de vendas nos últimos 3 meses), fornecendo memória temporal ao modelo.
 
@@ -51,7 +51,7 @@ Essa última etapa trouxe grande vantagem ao desempenho, melhorando as métricas
 
  O XGBoost se destacou em todas as métricas, e foi selecionado para seguir com os próximos passos
 
- Escolhi o GridSearchCV para encontrar a melhor combinação de hiperparâmetros para meu modelo por meio de validação cruzada. E os hiperparâmetros escolhidos foram:
+ Escolhi o GridSearchCV para encontrar a melhor combinação de hiperparâmetros para o meu modelo por meio de validação cruzada. E os hiperparâmetros escolhidos foram:
 
  - n_estimators: Quantidade de árvores
  - max_depth: Complexidade de cada árvore (profundidade)
@@ -61,7 +61,7 @@ Essa última etapa trouxe grande vantagem ao desempenho, melhorando as métricas
  - random_state: Reprodutibilidade
  - n_jobs: Performance
 
-E o resultado foi: {'max_depth': 5, 'n_estimators': 300,'colsample_bytree': 1.0, 'learning_rate': 0.1, 'subsample': 0.8}
+E o resultado foi: *{'max_depth': 5, 'n_estimators': 300,'colsample_bytree': 1.0, 'learning_rate': 0.1, 'subsample': 0.8}*
 
 # Cross Validate com TimeSeriesSplit
 
