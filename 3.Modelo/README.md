@@ -38,30 +38,38 @@ Essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já
 ###     **4. Análise Descritiva e Transformações**
 Voltando um pouco na análise estatística descritiva (2.Analise Exploratoria), observei que a variável `sales` apresentava alta assimetria, com **média muito maior que a mediana** e valores **máximos extremamente altos** (outliers) e a variável `dias_ativos_venda` apresentava **grande variação mensal**, o que pode induzir o modelo ao erro em meses com menor frequência.
 
-Dessa forma, apliquei a transformação logarítmica em `sales` para suavizar os efeitos dos outliers e criei a `variável dias_ativos_venda_lag3` (média móvel da frequência de vendas nos últimos 3 meses), fornecendo memória temporal ao modelo.
+Para lidar com esses pontos, foram aplicadas duas transformações principais:
+
+  - Transformação logarítmica em `sales`: suavizar o impacto dos outliers e melhorar a distribuição dos dados;
+
+  - Criação da variável `variável dias_ativos_venda_lag3`: média móvel da frequência de vendas nos três meses anteriores, permitindo capturar padrões temporais e fornecer ao modelo um senso de memória.
+
 
 <p align="center">
   <img src="Anexos\tabela_comparacao4.png" alt="tabela" width="50%" />
 </p>
 
-Essa última etapa trouxe grande vantagem ao desempenho, melhorando as métricas. Mesmo com meses discrepantes (ex: Fevereiro), esses foram as Features escolhidas.
+Essa última etapa contribuio bastante para a melhora das métricas de avaliação. Mesmo com meses discrepantes como em fevereiro. Abaixo, observa-se o desempenho mensal do modelo com as features selecionadas:
 <p align="center">
   <img src="Anexos\mes a mes 2.png" alt="tabela" width="90%" />
 </p>
 
- O XGBoost se destacou em todas as métricas, e foi selecionado para seguir com os próximos passos
+Entre os modelos testados, o XGBoost se destacou por apresentar os melhores resultados em todas as métricas avaliadas. Por isso, foi o algoritmo escolhido para seguir nas próximas etapas do projeto.
 
- Escolhi o GridSearchCV para encontrar a melhor combinação de hiperparâmetros para o meu modelo por meio de validação cruzada. E os hiperparâmetros escolhidos foram:
+Para otimizar os hiperparâmetros, utilizei a técnica GridSearchCV com validação cruzada. Os principais hiperparâmetros ajustados foram:
 
- - n_estimators: Quantidade de árvores
- - max_depth: Complexidade de cada árvore (profundidade)
- - learning_rate: Peso de cada árvore nova
- - subsample: % das amostras por árvore
- - colsample_bytree: % das features por árvore
- - random_state: Reprodutibilidade
- - n_jobs: Performance
+| Hiperparâmetro     | Descrição                                                 |
+|--------------------|------------------------------------------------------------|
+| `n_estimators`     | Quantidade de árvores no modelo                           |
+| `max_depth`        | Complexidade de cada árvore (profundidade)                |
+| `learning_rate`    | Peso de cada nova árvore adicionada                       |
+| `subsample`        | Porcentagem das amostras utilizadas por árvore            |
+| `colsample_bytree` | Porcentagem das features utilizadas por árvore            |
+| `random_state`     | Reprodutibilidade dos resultados                          |
+| `n_jobs`           | Número de threads utilizadas para otimizar a performance  |
 
-E o resultado foi: *{'max_depth': 5, 'n_estimators': 300,'colsample_bytree': 1.0, 'learning_rate': 0.1, 'subsample': 0.8}*
+
+O resultado foi: *{'max_depth': 5, 'n_estimators': 300,'colsample_bytree': 1.0, 'learning_rate': 0.1, 'subsample': 0.8}*
 
 # Cross Validate com TimeSeriesSplit
 
