@@ -90,7 +90,7 @@ O objetivo foi avaliar a **estabilidade e a capacidade de generalização do mod
 | 4    | 2.620,12 | 4.309,74 | 0.8062 |
 | 5    | 2.681,02 | 4.139,55 | 0.8296 |
 
-Esse tipo de validação é importante em problemas de séries temporais, pois:analisa como o modelo se comporta em períodos diferentes, ajuda a detectar overfitting e simular melhor a realidade, já que previsões futuras sempre são feitas com base no passado.
+Esse tipo de validação é importante em problemas de séries temporais, pois analisa como o modelo se comporta em períodos diferentes, ajuda a detectar overfitting e simular melhor a realidade, já que previsões futuras sempre são feitas com base no passado.
 
 ### Estatísticas Gerais
 
