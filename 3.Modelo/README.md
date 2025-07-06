@@ -66,10 +66,11 @@ Criação da variável dias_ativos_venda_lag3: média móvel da frequência de v
 </p>
 
 Observação: essa etapa trouxe a maior melhoria no desempenho, indicando que a transformação do target e a incorporação da dinâmica de vendas foram cruciais para o ganho de performance. O XGBoost se destacou em todas as métricas, passando a ser o modelo de escolha.
+<p align="center">
+  <img src="Anexos\mes a mes2.png" alt="%das familias de produto" width="90%" />
+</p>
 
-
-
-# Validação Cruzada com TimeSeriesSplit
+# Cross Validate com TimeSeriesSplit
 
 Para validar a robustez do modelo, foi aplicada validação cruzada temporal (`TimeSeriesSplit`), com 5 divisões crescentes de treino e teste, respeitando a ordem cronológica dos dados. O objetivo foi avaliar a estabilidade do desempenho do modelo ao longo do tempo, simulando diferentes períodos de previsão.
 
