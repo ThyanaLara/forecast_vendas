@@ -10,6 +10,8 @@ Fonte dos dados está [nesse link](https://www.kaggle.com/c/store-sales-time-ser
   <img src="3.Modelo\Anexos\TCC-1passos.jpg" alt="tabela" width="70%" />
 </p>
 
+## Overview do Projeto
+
 No contexto da área de FP&A, embora o orçamento anual seja elaborado com antecedência para projetar receitas, custos e volumes, ele frequentemente é impactado por fatores externos como sazonalidade, promoções, feriados e variações de demanda, o que pode comprometer a precisão do planejamento ao longo do ano. Por isso, o uso de forecast — revisões e atualizações periódicas das projeções — torna-se essencial para uma análise mais realista.
 
 Com os avanços em ciência de dados, é possível aplicar modelos de Machine Learning para gerar previsões mais precisas e adaptáveis, de acordo com múltiplos fatores(dados) e aprendizado contínuo dos dados históricos.
