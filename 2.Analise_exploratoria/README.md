@@ -14,7 +14,7 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
 
 **2. Representatividade das Famílias de Produtos ao Longo dos Anos**:
 
-  Também foi analisada a representatividade de cada família de produto ao longo do tempo. Observou-se que o mix de produtos mudou entre os anos.Poe exemplo a família GROCERY I, perdeu participação, enquanto PRODUCE ganhou destaque. Além disso, algumas famílias que não apareciam em determinados anos passaram a ser comercializadas posteriormente, o que pode refletir mudanças estratégicas de oferta.
+  Também foi analisada a representatividade de cada família de produto ao longo do tempo. Observou-se que o mix de produtos mudou entre os anos. Por exemplo a família GROCERY I, perdeu participação, enquanto PRODUCE ganhou destaque. Além disso, algumas famílias que não apareciam em determinados anos passaram a ser comercializadas posteriormente, o que pode refletir mudanças estratégicas de oferta.
 
 <p align="center">
   <img src="Graficos/porcen. das familias de produtos.png" alt="%das familias de produto" width="70%" />
@@ -29,10 +29,9 @@ A análise exploratória teve como objetivo entender o comportamento das variáv
   <img src="Graficos/Distribuição de Vendas (sales) por Ano-Mês.png" alt="Distribuição de Vendas - Outlier" width="70%" />
 </p>
 
-**4. Distribuição Mensal e por Tipo de Produto**:
+**4. Distribuição por Tipo de Produto**:
 
-  Também foi avaliada a distribuição da quantidade de vendas por mês e por tipo de produto. Observou-se que dezembro concentra o maior volume de vendas, reforçando o padrão sazonal.
-  E a distribuição de vendas por família, indicou que famílias como GROCERY I, BEVERAGES e PRODUCE concentram os maiores volumes, enquanto outras como BREAD/BAKERY possuem vendas mais baixas e estáveis.
+  A distribuição de vendas por família, indicou que famílias como GROCERY I, BEVERAGES e PRODUCE concentram os maiores volumes, enquanto outras como BREAD/BAKERY possuem vendas mais baixas e estáveis.
 
 <p align="center">
   <img src="Graficos/Distribuição de Vendas por Família.png" alt="Distribuição de Vendas por produto - Outlier" width="70%" />

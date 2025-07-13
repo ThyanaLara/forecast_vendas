@@ -1,5 +1,5 @@
 # Estratégia de Modelagem
-No desenvolvimento do modelo preditivo de vendas mensais, incrementei e avaliei o impacto das variáveis adicionando em etapas.  Os principais passos realizados e comentários do processo, são:
+No desenvolvimento do modelo preditivo de vendas mensais, as variáveis foram incrementadas e avaliadas em etapas, com o objetivo de medir seu impacto na performance do modelo. Os principais passos realizados e comentários do processo, são:
 
  ### **1. Modelo Base (sem engenharia de features)**
 Inicialmente, o modelo foi treinado apenas com as colunas originais da base:
@@ -18,7 +18,7 @@ Os resultados iniciais foram satisfatórios, porém ao avaliar os erros mês a m
   <img src="Anexos\mes a mes1.png" alt="tabela" width="90%" />
 </p>
 
-###     **2. Primeiras Features Criadas (de calendários e vendas ativas)**
+### **2. Primeiras Features Criadas (de calendários e vendas ativas)**
 Com base nas primeiras etapas do projeto, adicionei as variáveis externas calculadas anteriormente: qtd_feriados (número de feriados no mês) e dias_ativos_venda (quantidade de dias com movimentação de vendas por loja/família)
 
 Essas variáveis melhoraram a capacidade preditiva do modelo ao incorporar novos comportamentos ao calendário e a frequência de vendas. Resultado otimizou um pouco o RMSE e R² do Random Forest.
@@ -29,7 +29,7 @@ Essas variáveis melhoraram a capacidade preditiva do modelo ao incorporar novos
 | XGBoost       | 2.452,73  | 4.400,30  | 0.7995 |
 
 
-###     **3. Sazonalidade e Promoção (flags binárias)**
+### **3. Sazonalidade e Promoção (flags binárias)**
 Na tentativa de capturar padrões sazonais e comportamentos comerciais, adicionei novas variáveis binárias: has_promo (se houve promoção no mês), is_fim_ano (meses de novembro e dezembro) e sazonal_forte (meses com maiores erros identificados nos modelos passados)
 
 | Modelo        | MAE       | RMSE      | R²     |
@@ -39,7 +39,7 @@ Na tentativa de capturar padrões sazonais e comportamentos comerciais, adicione
 
 Essas variáveis não melhoraram o modelo, sugerindo que os efeitos sazonais já estam sendo capturados pelas demais Features, ou elas são simplistas demais para representar os padrões reais.
 
-###     **4. Análise Descritiva e Transformações**
+### **4. Análise Descritiva e Transformações**
 Voltando um pouco na análise estatística descritiva (2.Analise Exploratoria), observei que a variável `sales` apresentava alta assimetria, com **média muito maior que a mediana** e valores **máximos extremamente altos** (outliers) e a variável `dias_ativos_venda` apresentava **grande variação mensal**, o que pode induzir o modelo ao erro em meses com menor frequência.
 
 Para lidar com esses pontos, foram aplicadas duas transformações principais:
@@ -53,7 +53,7 @@ Para lidar com esses pontos, foram aplicadas duas transformações principais:
 | RandomForest  | 2.292,95  | 4.632,07  | 0.8948 |
 | XGBoost       | 2.132,75  | 4.100,29  | 0.8973 |
 
-Essa última etapa contribuio bastante para a melhora das métricas de avaliação. Mesmo com meses discrepantes como em fevereiro. Abaixo, observa-se o desempenho mensal do modelo com as features selecionadas:
+Essa última etapa contribuiu bastante para a melhora das métricas de avaliação. Mesmo com meses discrepantes como em fevereiro. Abaixo, observa-se o desempenho mensal do modelo com as features selecionadas:
 <p align="center">
   <img src="Anexos\mes a mes 2.png" alt="tabela" width="90%" />
 </p>
